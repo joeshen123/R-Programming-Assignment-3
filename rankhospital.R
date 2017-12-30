@@ -1,7 +1,7 @@
-best <- function(state, outcome){
+rankhospital <- function(state, outcome, num = "best"){
   # Read outcome data
   data <- read.csv("outcome-of-care-measures.csv")
-
+  
   # Establish a vector of possible outcome names
   vect <- c("heart attack", "heart failure", "pneumonia")
   
@@ -40,7 +40,18 @@ best <- function(state, outcome){
   # Use order function order the state based on their 30 days mortality and alphabetical names
   state_data <- state_data[order(state_data[,colnum],state_data[,2],na.last = NA),]
   
-  # Select the number one hospital name based on the list
-  state_data[1,2]
+  # Use if statement to assign number to best and worst, then extract the 
+  #specifc hospital name in the ranking
+  N <- sum(complete.cases(state_data[,colnum]))
+  
+  if (num == "best") {
+    num <- 1
+  }
+  
+  if (num == "worst") {
+    num <- N
+  }
+  
+  state_data[num, 2]
  
 }
