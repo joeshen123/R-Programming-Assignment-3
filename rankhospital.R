@@ -37,7 +37,8 @@ rankhospital <- function(state, outcome, num = "best"){
   # Use grep function to subset the data from selected state
   state_data <- data[grep(state,data[,7]),]
   
-  # Use order function order the state based on their 30 days mortality and alphabetical names
+  # Use order function to order the state based on their 30 days mortality and alphabetical names
+  #remove the NA value
   state_data <- state_data[order(state_data[,colnum],state_data[,2],na.last = NA),]
   
   # Use if statement to assign number to best and worst, then extract the 
